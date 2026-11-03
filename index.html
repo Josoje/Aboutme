@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="En enkel about me-side for Jonas."
+    />
+    <title>Om mig | Jonas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="#top" aria-label="Gå til toppen">J<span>.</span></a>
+      <button class="theme-button" id="theme-button" type="button">
+        Skift tema
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="intro-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Hej, jeg er</p>
+          <h1 id="intro-title">Jonas<span>.</span></h1>
+          <p class="intro">
+            En nysgerrig person, der elsker at lære nyt, skabe ting og gøre
+            idéer til virkelighed.
+          </p>
+          <a class="primary-button" href="#om-mig">Læs mere <span>↓</span></a>
+        </div>
+        <div class="profile-card" aria-label="Profilkort">
+          <div class="avatar">J</div>
+          <p class="profile-label">Kreativ problemløser</p>
+          <p class="profile-location">Danmark</p>
+        </div>
+      </section>
+
+      <section class="content-section" id="om-mig" aria-labelledby="about-title">
+        <p class="eyebrow">Lidt om mig</p>
+        <h2 id="about-title">Jeg bygger, lærer og udforsker.</h2>
+        <p>
+          Jeg er interesseret i teknologi, design og projekter, hvor jeg kan
+          kombinere kreativitet med logik. Når jeg ikke sidder ved computeren,
+          bruger jeg gerne tid på musik, natur og gode mennesker.
+        </p>
+      </section>
+
+      <section class="content-section" aria-labelledby="skills-title">
+        <p class="eyebrow">Det arbejder jeg med</p>
+        <h2 id="skills-title">Mine interesser</h2>
+        <div class="interest-list">
+          <span>JavaScript</span>
+          <span>Webdesign</span>
+          <span>Kreativitet</span>
+          <span>Problemløsning</span>
+        </div>
+      </section>
+
+      <section class="contact-section" aria-labelledby="contact-title">
+        <div>
+          <p class="eyebrow">Skal vi tale sammen?</p>
+          <h2 id="contact-title">Lad os skabe noget godt.</h2>
+        </div>
+        <a class="primary-button" href="mailto:hej@example.com">Skriv til mig <span>↗</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Jonas</p>
+      <p>Lavet med HTML, CSS og JavaScript</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

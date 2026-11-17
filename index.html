@@ -13,9 +13,22 @@
   <body>
     <header class="site-header">
       <a class="logo" href="#top" aria-label="Gå til toppen">J<span>.</span></a>
-      <button class="theme-button" id="theme-button" type="button">
-        Skift tema
-      </button>
+      <nav class="site-nav" aria-label="Hovednavigation">
+        <ul class="nav-list" id="nav-list">
+          <li><a href="#top">Hjem</a></li>
+          <li><a href="#om-mig">Om mig</a></li>
+          <li><a href="#interesser">Interesser</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
+          ☰
+        </button>
+        <button class="theme-button" id="theme-button" type="button">
+          Skift tema
+        </button>
+      </div>
     </header>
 
     <main id="top">
@@ -46,7 +59,7 @@
         </p>
       </section>
 
-      <section class="content-section" aria-labelledby="skills-title">
+      <section class="content-section" id="interesser" aria-labelledby="skills-title">
         <p class="eyebrow">Det arbejder jeg med</p>
         <h2 id="skills-title">Mine interesser</h2>
         <div class="interest-list">
@@ -57,7 +70,7 @@
         </div>
       </section>
 
-      <section class="contact-section" aria-labelledby="contact-title">
+      <section class="contact-section" id="kontakt" aria-labelledby="contact-title">
         <div>
           <p class="eyebrow">Skal vi tale sammen?</p>
           <h2 id="contact-title">Lad os skabe noget godt.</h2>

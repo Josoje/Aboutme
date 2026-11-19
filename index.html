@@ -8,51 +8,103 @@
       content="En enkel about me-side for Jonas."
     />
     <title>Om mig | Jonas</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var isDark = stored ? stored === "dark" : prefersDark;
+          if (isDark) document.documentElement.classList.add("dark");
+        } catch (error) {
+          /* localStorage can be unavailable; fall back to the light theme. */
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <a class="skip-link" href="#top" data-i18n="skipLink">Spring til indhold</a>
+
     <header class="site-header">
-      <a class="logo" href="#top" aria-label="Gå til toppen">J<span>.</span></a>
-      <nav class="site-nav" aria-label="Hovednavigation">
+      <a
+        class="logo"
+        href="#top"
+        aria-label="Gå til toppen"
+        data-i18n-aria="logoAria"
+      >J<span>.</span></a>
+      <nav class="site-nav" aria-label="Hovednavigation" data-i18n-aria="navAria">
         <ul class="nav-list" id="nav-list">
-          <li><a href="#top">Hjem</a></li>
-          <li><a href="#om-mig">Om mig</a></li>
-          <li><a href="#interesser">Interesser</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="#top" data-i18n="nav.home">Hjem</a></li>
+          <li><a href="#om-mig" data-i18n="nav.about">Om mig</a></li>
+          <li><a href="#interesser" data-i18n="nav.interests">Interesser</a></li>
+          <li><a href="#kontakt" data-i18n="nav.contact">Kontakt</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
-          ☰
+        <div
+          class="language-switch"
+          role="group"
+          aria-label="Sprog"
+          data-i18n-aria="languageAria"
+        >
+          <button
+            class="language-button"
+            type="button"
+            data-lang="da"
+            aria-pressed="true"
+            aria-label="Dansk"
+          >DA</button>
+          <button
+            class="language-button"
+            type="button"
+            data-lang="en"
+            aria-pressed="false"
+            aria-label="English"
+          >EN</button>
+        </div>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-list"
+          aria-label="Åbn menu"
+          data-i18n-aria="menuOpen"
+        >
+          <span aria-hidden="true">☰</span>
         </button>
-        <button class="theme-button" id="theme-button" type="button">
-          Skift tema
+        <button class="theme-button" id="theme-button" type="button" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span class="theme-label" data-i18n="theme.label">Mørkt tema</span>
         </button>
       </div>
     </header>
 
-    <main id="top">
+    <main id="top" tabindex="-1">
       <section class="hero" aria-labelledby="intro-title">
         <div class="hero-copy">
-          <p class="eyebrow">Hej, jeg er</p>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Hej, jeg er</p>
           <h1 id="intro-title">Jonas<span>.</span></h1>
-          <p class="intro">
+          <p class="intro" data-i18n="hero.intro">
             En nysgerrig person, der elsker at lære nyt, skabe ting og gøre
             idéer til virkelighed.
           </p>
-          <a class="primary-button" href="#om-mig">Læs mere <span>↓</span></a>
+          <a class="primary-button" href="#om-mig">
+            <span data-i18n="hero.cta">Læs mere</span>
+            <span aria-hidden="true">↓</span>
+          </a>
         </div>
-        <div class="profile-card" aria-label="Profilkort">
-          <div class="avatar">J</div>
-          <p class="profile-label">Kreativ problemløser</p>
-          <p class="profile-location">Danmark</p>
+        <div class="profile-card" aria-label="Profilkort" data-i18n-aria="hero.profileAria">
+          <div class="avatar" aria-hidden="true">J</div>
+          <p class="profile-label" data-i18n="hero.role">Kreativ problemløser</p>
+          <p class="profile-location" data-i18n="hero.location">Danmark</p>
         </div>
       </section>
 
       <section class="content-section" id="om-mig" aria-labelledby="about-title">
-        <p class="eyebrow">Lidt om mig</p>
-        <h2 id="about-title">Jeg bygger, lærer og udforsker.</h2>
-        <p>
+        <p class="eyebrow" data-i18n="about.eyebrow">Lidt om mig</p>
+        <h2 id="about-title" data-i18n="about.title">Jeg bygger, lærer og udforsker.</h2>
+        <p data-i18n="about.body">
           Jeg er interesseret i teknologi, design og projekter, hvor jeg kan
           kombinere kreativitet med logik. Når jeg ikke sidder ved computeren,
           bruger jeg gerne tid på musik, natur og gode mennesker.
@@ -60,30 +112,34 @@
       </section>
 
       <section class="content-section" id="interesser" aria-labelledby="skills-title">
-        <p class="eyebrow">Det arbejder jeg med</p>
-        <h2 id="skills-title">Mine interesser</h2>
+        <p class="eyebrow" data-i18n="interests.eyebrow">Det arbejder jeg med</p>
+        <h2 id="skills-title" data-i18n="interests.title">Mine interesser</h2>
         <div class="interest-list">
-          <span>JavaScript</span>
-          <span>Webdesign</span>
-          <span>Kreativitet</span>
-          <span>Problemløsning</span>
+          <span data-i18n="interests.javascript">JavaScript</span>
+          <span data-i18n="interests.webdesign">Webdesign</span>
+          <span data-i18n="interests.creativity">Kreativitet</span>
+          <span data-i18n="interests.problemSolving">Problemløsning</span>
         </div>
       </section>
 
       <section class="contact-section" id="kontakt" aria-labelledby="contact-title">
         <div>
-          <p class="eyebrow">Skal vi tale sammen?</p>
-          <h2 id="contact-title">Lad os skabe noget godt.</h2>
+          <p class="eyebrow" data-i18n="contact.eyebrow">Skal vi tale sammen?</p>
+          <h2 id="contact-title" data-i18n="contact.title">Lad os skabe noget godt.</h2>
         </div>
-        <a class="primary-button" href="mailto:hej@example.com">Skriv til mig <span>↗</span></a>
+        <a class="primary-button" href="mailto:hej@example.com">
+          <span data-i18n="contact.cta">Skriv til mig</span>
+          <span aria-hidden="true">↗</span>
+        </a>
       </section>
     </main>
 
     <footer>
       <p>© <span id="year"></span> Jonas</p>
-      <p>Lavet med HTML, CSS og JavaScript</p>
+      <p data-i18n="footer.note">Lavet med HTML, CSS og JavaScript</p>
     </footer>
 
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

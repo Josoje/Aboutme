@@ -2,7 +2,7 @@
 
 A small personal "about me" site built with plain HTML, CSS and JavaScript — no framework, no build step, no dependencies.
 
-The site is Danish by default and is being extended with a Danish/English switcher. It is a work in progress: the current focus is responsive layout and everyday UX, not new content.
+The site is Danish by default, with a Danish/English switcher, and is a work in progress: the current focus is responsive layout and everyday UX, not new content.
 
 > Planning notes and the full task breakdown live in [HANDOFF.md](HANDOFF.md).
 
@@ -10,11 +10,13 @@ The site is Danish by default and is being extended with a Danish/English switch
 
 ## Features
 
-- **Sticky header** with logo, section navigation, theme button and mobile hamburger menu
-- **Hero, About, Interests and Contact** sections with anchored navigation
-- **Light/dark theme** toggle (persistence and OS preference are on the roadmap)
-- **Responsive layout** that collapses to a single column on small screens
-- **Zero dependencies** — the whole site is three files
+- **Sticky header** with logo, section navigation, DA/EN switch, theme button and mobile hamburger menu
+- **Hero, About, Interests and Contact** sections with anchored navigation and scrollspy (`aria-current`)
+- **Light/dark theme** toggle that persists in `localStorage` and follows the OS preference on first visit
+- **Danish/English switch** that updates all text, `<html lang>`, title and meta description, and persists across reloads
+- **Responsive layout** from 320px phones to wide desktops, with a collapsible menu below 900px
+- **Accessibility**: skip link, visible keyboard focus, 44px touch targets and reduced-motion support
+- **Zero dependencies** — the whole site is a handful of static files
 
 ## Tech stack
 
@@ -31,9 +33,11 @@ The site is Danish by default and is being extended with a Danish/English switch
 Aboutme/
 ├── index.html    # Page markup and content
 ├── style.css     # All styling, theme variables, media queries
-├── script.js     # Theme toggle, mobile nav, footer year
+├── i18n.js       # DA/EN translations and applyLanguage()
+├── script.js     # Theme, language wiring, mobile nav, scrollspy, footer year
 ├── README.md     # This file
-└── HANDOFF.md    # Current state, known gaps and the improvement plan
+├── HANDOFF.md    # Current state, known gaps and the improvement plan
+└── plan.md       # Implementation plan for the UX/accessibility work
 ```
 
 ## Run locally
@@ -56,10 +60,10 @@ Then visit <http://localhost:8000>.
 
 Work is organised in five phases; details and acceptance criteria are in [HANDOFF.md](HANDOFF.md).
 
-- [ ] **Phase 1 — Responsive foundation:** breakpoint scale (1024 / 900 / 700 / 420px), tablet layout, contact section stacking, `scroll-margin-top` for the sticky header, 44px+ touch targets
-- [ ] **Phase 2 — Navigation UX:** scrollspy with `IntersectionObserver` + `aria-current`, menu closes on outside click and `Escape`, animated open/close
-- [ ] **Phase 3 — Theme, language and accessibility:** persist theme in `localStorage` and honour `prefers-color-scheme`, skip link, `:focus-visible` styles, reduced-motion support, **DA/EN switch**
-- [ ] **Phase 4 — Verify and polish:** 320–1440px test matrix, keyboard-only pass, Lighthouse accessibility ≥ 95
+- [x] **Phase 1 — Responsive foundation:** breakpoint scale (1024 / 900 / 700 / 420px), tablet layout, contact section stacking, `scroll-margin-top` for the sticky header, 44px+ touch targets
+- [x] **Phase 2 — Navigation UX:** scrollspy with `IntersectionObserver` + `aria-current`, menu closes on outside click and `Escape`, animated open/close
+- [x] **Phase 3 — Theme, language and accessibility:** persist theme in `localStorage` and honour `prefers-color-scheme`, skip link, `:focus-visible` styles, reduced-motion support, **DA/EN switch**
+- [x] **Phase 4 — Verify and polish:** 320–1440px test matrix, keyboard-only pass (Lighthouse accessibility re-check still open)
 - [ ] **Phase 5 — Deployment:** GitHub Actions workflow using `actions/deploy-pages`
 
 Not planned for now: framework migration, CMS, backend or contact form, and new content sections (Projects, Experience).

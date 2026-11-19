@@ -10,24 +10,31 @@
 
 ## 1. Where the project stands
 
-Three files, no tooling:
+Five files, no tooling:
 
 | File | Purpose |
 | --- | --- |
 | `index.html` | Single-page site: header, hero, about, interests, contact, footer |
-| `style.css` | All styling, theme variables, one breakpoint (`max-width: 700px`) |
-| `script.js` | Year in footer, theme toggle, mobile nav toggle, close nav on link click |
+| `style.css` | All styling, theme variables, breakpoint scale (1024 / 900 / 700 / 420px) |
+| `i18n.js` | DA/EN translation dictionary and `applyLanguage()` |
+| `script.js` | Theme persistence, language wiring, mobile nav, scrollspy, footer year |
+| `plan.md` | Implementation plan for the UX/accessibility work |
 
 Already working:
 
-- Sticky header with logo, 4 nav links, theme button, hamburger below 700px
+- Sticky header with logo, 4 nav links, DA/EN switch, theme button, hamburger below 900px
 - Hero as 2-column grid, then single column on mobile
-- Working light/dark theme (class `dark` on `<body>`)
-- Section anchors `#top`, `#om-mig`, `#interesser`, `#kontakt`
+- Light/dark theme persisted in `localStorage`, following `prefers-color-scheme` on first visit
+- Section anchors `#top`, `#om-mig`, `#interesser`, `#kontakt` with sticky-header offsets
+- Scrollspy with `aria-current`, skip link, keyboard focus styles, reduced-motion support
+- Danish/English switch (texts, `<html lang>`, title, meta description; persisted)
 
 ---
 
 ## 2. Known gaps (the actual work)
+
+> **Status 2026-11-19:** items 1–8 are implemented in `index.html`, `style.css`,
+> `i18n.js` and `script.js`. Item 9 (deployment) is still open.
 
 1. **Only one breakpoint (700px)** → tablet widths (700–1024px) are cramped.
 2. **No `scroll-margin-top`** → sticky header covers section headings when navigating via anchors.
@@ -68,7 +75,7 @@ Already working:
 
 ### Phase 2 — Navigation UX
 
-- Scrollspy with `IntersectionObserver` → highlight active link, set `aria-current="true"` on the active item.
+- Scrollspy (rAF-throttled scroll handler) → highlight active link, set `aria-current="true"` on the active item.
 - Mobile menu: close on outside click and on `Escape`, return focus to the toggle, animate open/close (height/opacity or transform).
 - Smooth transitions for nav hover/active states (respecting reduced motion).
 - Keep the nav usable by keyboard: tab order, visible focus, `aria-expanded` kept in sync.
@@ -149,15 +156,15 @@ No build step is required (static files). Note: files starting with `_` are igno
 
 ## 5. Acceptance criteria
 
-- [ ] No horizontal scroll at 320px, in either theme or language.
-- [ ] Nav collapses at tablet width, not only on phones; menu closes on link click, outside click, and `Escape`.
-- [ ] Clicking a nav link lands with the heading fully visible below the sticky header.
-- [ ] Active section is indicated in the nav and exposed via `aria-current`.
-- [ ] Theme survives reload and matches OS preference on first visit.
-- [ ] DA/EN switch changes all visible strings, `<html lang>`, `<title>`, and persists across reloads.
-- [ ] Skip link appears on focus and jumps to `<main>`.
-- [ ] All controls reachable and clearly focused via keyboard; no motion when `prefers-reduced-motion: reduce`.
-- [ ] Lighthouse accessibility ≥ 95.
+- [x] No horizontal scroll at 320px, in either theme or language.
+- [x] Nav collapses at tablet width, not only on phones; menu closes on link click, outside click, and `Escape`.
+- [x] Clicking a nav link lands with the heading fully visible below the sticky header.
+- [x] Active section is indicated in the nav and exposed via `aria-current`.
+- [x] Theme survives reload and matches OS preference on first visit.
+- [x] DA/EN switch changes all visible strings, `<html lang>`, `<title>`, and persists across reloads.
+- [x] Skip link appears on focus and jumps to `<main>`.
+- [x] All controls reachable and clearly focused via keyboard; no motion when `prefers-reduced-motion: reduce`.
+- [ ] Lighthouse accessibility ≥ 95 — not re-run after the update.
 
 ---
 
@@ -173,7 +180,7 @@ No build step is required (static files). Note: files starting with `_` are igno
 
 ## 7. Notes for the next session
 
-- Start by reading `index.html`, `style.css`, `script.js` — together they are under 500 lines.
+- Start by reading `index.html`, `style.css`, `i18n.js`, `script.js` — together they are under 1000 lines.
 - Prefer appending new media queries in the existing `max-width` direction (desktop → down) unless the mobile-first refactor is done deliberately as its own commit.
 - Don't introduce a build step, framework, or npm dependencies; the site must stay openable via `index.html`.
 - Contact email is still the placeholder `hej@example.com` — do not "fix" it without asking the owner.

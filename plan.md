@@ -1,6 +1,6 @@
 # Plan — Bring Aboutme up to the target version
 
-**Status:** Planned, not started
+**Status:** Implemented 2026-11-19 — Phase 5 (deployment) remains open
 **Scope:** UX, responsiveness, accessibility and i18n, following `agent.md` and `HANDOFF.md`.
 **Out of scope:** new content or sections, frameworks, bundlers, CMS/backend, and changing the placeholder contact email (`hej@example.com`).
 
@@ -34,13 +34,13 @@ The site stays a zero-dependency, no-build static site that can be opened via `i
 
 - **Theme:** toggle on `<html>`, persist `theme` in `localStorage`, sync button label and `aria-pressed`, respect OS preference when nothing is stored.
 - **Mobile menu:** keep open/close with `aria-expanded`, add close on outside click, close on `Escape` (return focus to the toggle) and on link click.
-- **Scrollspy:** `IntersectionObserver` with a header-aware `rootMargin`; set `aria-current="true"` on the active nav link, clear the others, and keep `#top` active at page top.
+- **Scrollspy:** rAF-throttled scroll handler that marks the last section passing the header line; sets `aria-current="true"` on the active nav link, clears the others, keeps `#top` active at page top, and activates the last link at page bottom. A nav-link click wins for one second so the clicked section stays highlighted.
 - **Wiring:** language buttons, footer year (existing behaviour) and defensive `if (el)` guards.
 
 ## 4. `style.css`
 
 - **Tokens:** add `--header-height` (measured, ~76px) and use it for anchor offsets.
-- **Anchors:** `scroll-padding-top` plus `[id] { scroll-margin-top: var(--header-height) }` to fix sticky-header overlap.
+- **Anchors:** `[id] { scroll-margin-top: var(--header-height) }` to fix sticky-header overlap (no `scroll-padding-top`, which would double the offset).
 - **Breakpoint scale** (keep the existing `max-width` direction, minimal diff):
   - `1024px` — tablet layout tuning
   - `900px` — nav collapses to hamburger (moves off `700px`)
@@ -87,4 +87,6 @@ This matches the suggested commit sequence in `HANDOFF.md` §6.
 ## Open decisions
 
 1. **Deploy workflow:** include the GitHub Actions workflow now or leave Phase 5 out?
+   — Left out for now; the draft remains in `HANDOFF.md` §4.
 2. **CSS direction:** keep the current `max-width` queries (recommended, minimal diff) or do the full mobile-first rewrite from `agent.md` as a separate commit?
+   — Decided: kept the existing `max-width` query direction for a minimal diff.

@@ -10,13 +10,14 @@ Personal "About Me" site for Jonas — `C:\Code\Aboutme`.
 - **Mobile-first design** — base styles target mobile, then grow via `min-width` breakpoints
   (~700px, ~1024px) and fluid `clamp()` typography.
 - **Design tokens** in CSS `:root` (`--background`, `--surface`, `--text`, `--muted`, `--accent`,
-  `--border`, `--shadow`); dark mode overrides via `body.dark`.
+  `--border`, `--shadow`, `--header-height`); dark mode overrides via `:root.dark` (the class
+  is set on `<html>` by an inline script in `<head>` to avoid a theme flash).
 - **Theming:** toggle in header via `script.js`; persist in `localStorage`; respect
   `prefers-color-scheme` on first visit.
-- **i18n:** Danish (default) + English via `data-i18n` attributes and a translation dictionary
-  in `script.js`; updates `<html lang>`, `<title>`, meta description.
+- **i18n:** Danish (default) + English via `data-i18n` attributes and the translation dictionary
+  in `i18n.js`; updates `<html lang>`, `<title>`, meta description and persists the choice.
 - **Navigation:** sticky header; hamburger below ~900px; horizontal nav at desktop.
-  Scrollspy via `IntersectionObserver` with `aria-current` on the active link.
+  Scrollspy via a rAF-throttled scroll handler with `aria-current` on the active link.
   Mobile menu closes on outside click / Escape; smooth scroll via `scroll-behavior: smooth`
   + `scroll-margin-top` on sections.
 - **Accessibility:** skip-to-content link, `:focus-visible`, `prefers-reduced-motion`,
@@ -29,10 +30,12 @@ Personal "About Me" site for Jonas — `C:\Code\Aboutme`.
 - Verify changes in browser before finishing.
 
 ## Current state
-- Files: `index.html`, `style.css`, `script.js`
-- Implemented: new navigation (sticky header, nav links, mobile hamburger)
+- Files: `index.html`, `style.css`, `i18n.js`, `script.js` (plus `plan.md` and the docs)
+- Implemented: sticky header navigation, scrollspy, mobile menu (outside click / `Escape`),
+  persisted light/dark theme, DA/EN switch, skip link, responsive breakpoint scale
 - Live deployment context: GitHub repo `Josje/Aboutme`, GitHub Pages at
-  `https://josoje.github.io/Aboutme/` (deployed version currently predates the new nav)
+  `https://josoje.github.io/Aboutme/` (the deployed version predates these changes and
+  GitHub Pages is not configured to deploy from Actions yet)
 
 ## Testing checklist
 - Viewports: 320 / 375 / 768 / 1024 / 1440 px
